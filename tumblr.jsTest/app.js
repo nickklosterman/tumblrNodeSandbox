@@ -1,13 +1,7 @@
 var fs = require('fs'),
-request = require('request')
+    request = require('request')
 
 var tumblr = require('tumblr.js');
-var client = tumblr.createClient({
-  consumer_key: process.env.TUMBLR_CONSUMER_KEY,
-  consumer_secret: process.env.TUMBLR_SECRET_KEY, 
-  token: process.env.TUMBLR_TOKEN,
-  token_secret: process.env.TUMBLR_TOKEN_SECRET
-});
 
 // var client = new tumblr.Client({
 //     // ...
@@ -25,74 +19,90 @@ var client = tumblr.createClient({
 //     });
 //   }
 // });
-
-client.posts('pinuparena.tumblr.com', function(err,data) {
-  if (err) {
-    console.log(err)
-  } else {
-//    console.log(data)
-    data.posts.forEach(function(element,index,fullArray) {
-      var slug  = element.slug
-      if (typeof element.photos !== 'undefined') {
-//        saveFile(element)
-         element.photos.forEach(function(element,index,fullArray) {
-           saveFile(element,slug)
-           // var splitUrl = (element.alt_sizes[0].url).split('/')
-           // var imageFilename= splitUrl[splitUrl.length-1]
-           // console.log(slug+"_"+imageFilename)
-
-//           console.log(element.alt_sizes[0])
-         })
-      }
-    })
-    // data.blogs.forEach(function (blog) {
-    //     console.log(blog.name);
-    // });
-  }
-})
-
-function saveImages(element){
+function TumblrConnection(blog){
+  this.blog=blog
+  this.client = tumblr.createClient({
+    consumer_key: process.env.TUMBLR_CONSUMER_KEY,
+    consumer_secret: process.env.TUMBLR_SECRET_KEY, 
+    token: process.env.TUMBLR_TOKEN,
+    token_secret: process.env.TUMBLR_TOKEN_SECRET
+  });
 
 }
 
-function saveFile(element,slug){
-  var url = element.alt_sizes[0].url
-  var splitURL = element.alt_sizes[0].url.split('/')
-  var imageFilename = splitURL[splitURL.length-1]
-  var filename=slug+"_"+imageFilename
-  var that = this;
-  if ( fs.existsSync(filename) ) {
-    console.log(filename+" already exists. Skipping.")
-  } else {
-    var imageStream=fs.createWriteStream(filename)
-    imageStream.on('close',function(){
-      console.log("Writing of "+filename+" done.")
-    })
+TumblrConnection.prototype.savePostImages = function() {
+  var that = this
+  this.client.posts(this.blog, function(err,data) {
+    if (err) {
+      console.log(that.blog+"-"+err)
+    } else {
+      //    console.log(data)
+      data.posts.forEach(function(element,index,fullArray) {
+        var slug  = element.slug
+        if (typeof element.photos !== 'undefined') {
+          //        saveFile(element)
+          element.photos.forEach(function(element,index,fullArray) {
+            that.saveFile(element,slug)
+            // var splitUrl = (element.alt_sizes[0].url).split('/')
+            // var imageFilename= splitUrl[splitUrl.length-1]
+            // console.log(slug+"_"+imageFilename)
+            //           console.log(element.alt_sizes[0])
+          })
+        }
+      })
+      // data.blogs.forEach(function (blog) {
+      //     console.log(blog.name);
+      // });
+    }
+  })
+}
 
-    var options = {url:url,headers:{ 'User-Agent':'request'}}
-    //do http requests for the image count against our limit? They aren't using the api,
-    //console.log(options) 
-    var imagerequest=request(options,function(err,resp,body) {
-                       if (err){
-		         if (err.code === 'ECONNREFUSED') {
-			   console.error(url+'Refused connection');
-		         } else if (err.code==='ECONNRESET') {
-			   console.error(url+'reset connection')
-		         } else if (err.code==='ENOTFOUND') {
-			   console.error(url+'enotfound')
-		         } else {
-			   console.log(url+err);
-			   console.log(err.stack);
+
+TumblrConnection.prototype.saveFile = function(element,slug){
+  if (typeof element.alt_sizes !== 'undefined' && element.alt_sizes.length > 0) {
+    var url = element.alt_sizes[0].url
+    var splitURL = element.alt_sizes[0].url.split('/')
+    var imageFilename = splitURL[splitURL.length-1]
+    var filename=slug+"_"+imageFilename
+    var that = this;
+    if ( fs.existsSync(filename) ) {
+      console.log(filename+" already exists. Skipping.")
+    } else {
+      var imageStream=fs.createWriteStream(filename)
+      imageStream.on('close',function(){
+        console.log("Writing of "+filename+" done.")
+      })
+
+      var options = {url:url,headers:{ 'User-Agent':'request'}}
+      //do http requests for the image count against our limit? They aren't using the api,
+      //console.log(options) 
+      var that = this
+      var imagerequest=request(options,function(err,resp,body) {
+                         if (err){
+		           if (err.code === 'ECONNREFUSED') {
+			     console.error(url+'Refused connection');
+		           } else if (err.code==='ECONNRESET') {
+			     console.error(url+'reset connection')
+		           } else if (err.code==='ENOTFOUND') {
+			     console.error(url+'enotfound')
+		           } else {
+			     console.log(url+err);
+			     console.log(err.stack);
+		           }
+                           that.saveFile(url,filename);//call ourself again if there was an error (mostlikely due to hitting the server too hard)
 		         }
-                         this.saveFile(url,filename);//call ourself again if there was an error (mostlikely due to hitting the server too hard)
-		       }
-                     })
-    imageStream.on('error',function() {
-      if (error) {
-        console.log(error)
-      }
-    })
-    imagerequest.pipe(imageStream)
+                       })
+      imageStream.on('error',function() {
+        if (error) {
+          console.log(error)
+        }
+      })
+      imagerequest.pipe(imageStream)
+    }
   }
 }
 
+module.exports = TumblrConnection
+// function(blog) {
+//   return new TumblrConnection(blog)
+// }

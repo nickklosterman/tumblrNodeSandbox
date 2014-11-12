@@ -30,6 +30,8 @@ blog.photo({limit: 5}, function(error, response) {
   
   //  console.log(response.posts);
   response.posts.forEach(function(element,index,fullArray){
+    console.log(element.blog_name)
+    console.log(element.id)
     element.photos.forEach(function(element,index,fullArray){
       console.log(element.alt_sizes[0]) //appears as if  slot 0 hsa the highest res image.
     })
@@ -45,3 +47,14 @@ var user = new tumblr.User(oauth);
 
 //   console.log(response.user);
 // });
+
+// user.following(function(error,response) {
+// if (error) {
+// throw new Error(error);
+// }
+// response.blogs.forEach(function(element,index,fullArray) {
+//   console.log(element.name+"+"+element.url)
+// //  console.log(
+// })
+
+// })
