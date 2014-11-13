@@ -111,3 +111,6 @@ module.exports = TumblrConnection
 // function(blog) {
 //   return new TumblrConnection(blog)
 // }
+
+
+//todo check disk space  use : https://www.npmjs.org/package/diskspace
