@@ -24,6 +24,7 @@
     "private": true,
     "dependencies": {
 	"tumblr.js": "0.0.4",
+	"graceful-fs":"3.0.4",
 	"request": "^2.47.0"
     }
 }

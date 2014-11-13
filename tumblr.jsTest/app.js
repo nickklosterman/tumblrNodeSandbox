@@ -1,4 +1,4 @@
-var fs = require('fs'),
+var fs = require('graceful-fs'),
     request = require('request')
 
 var tumblr = require('tumblr.js');
@@ -19,15 +19,16 @@ var tumblr = require('tumblr.js');
 //     });
 //   }
 // });
-function TumblrConnection(blog){
-  this.blog=blog
-  this.client = tumblr.createClient({
-    consumer_key: process.env.TUMBLR_CONSUMER_KEY,
-    consumer_secret: process.env.TUMBLR_SECRET_KEY, 
-    token: process.env.TUMBLR_TOKEN,
-    token_secret: process.env.TUMBLR_TOKEN_SECRET
-  });
-
+function TumblrConnection(name){
+    this.name=name
+    this.blog=name+".tumblr.com"
+    this.client = tumblr.createClient({
+	consumer_key: process.env.TUMBLR_CONSUMER_KEY,
+	consumer_secret: process.env.TUMBLR_SECRET_KEY, 
+	token: process.env.TUMBLR_TOKEN,
+	token_secret: process.env.TUMBLR_TOKEN_SECRET
+    });
+    
 }
 
 TumblrConnection.prototype.savePostImages = function() {
@@ -63,13 +64,15 @@ TumblrConnection.prototype.saveFile = function(element,slug){
     var url = element.alt_sizes[0].url
     var splitURL = element.alt_sizes[0].url.split('/')
     var imageFilename = splitURL[splitURL.length-1]
-    var filename=slug+"_"+imageFilename
+    var filename=this.name+"_"+slug+"_"+imageFilename
     var that = this;
     if ( fs.existsSync(filename) ) {
-      console.log(filename+" already exists. Skipping.")
+	//console.log(filename+" already exists. Skipping.")
+	process.stdout.write("X")
     } else {
       var imageStream=fs.createWriteStream(filename)
-      imageStream.on('close',function(){
+	imageStream.on('close',function(){
+//	imageStream.on('end',function(){
         console.log("Writing of "+filename+" done.")
       })
 
@@ -80,21 +83,23 @@ TumblrConnection.prototype.saveFile = function(element,slug){
       var imagerequest=request(options,function(err,resp,body) {
                          if (err){
 		           if (err.code === 'ECONNREFUSED') {
-			     console.error(url+'Refused connection');
+			     console.error(url+' Refused connection');
 		           } else if (err.code==='ECONNRESET') {
-			     console.error(url+'reset connection')
+			     console.error(url+' reset connection')
 		           } else if (err.code==='ENOTFOUND') {
-			     console.error(url+'enotfound')
+			     console.error(url+' enotfound')
 		           } else {
 			     console.log(url+err);
 			     console.log(err.stack);
 		           }
-                           that.saveFile(url,filename);//call ourself again if there was an error (mostlikely due to hitting the server too hard)
+			     //                             that.saveFile(element,slug);//call ourself again if there was an error (mostlikely due to hitting the server too hard)
+			     //use settimeout and call yourself?
 		         }
                        })
-      imageStream.on('error',function() {
+      imageStream.on('error',function(error) {
         if (error) {
-          console.log(error)
+            console.log("imageStream error:"+error)
+//	    that.saveFile(element,slug);//call ourself again if there was an error (mostlikely due to hitting the server too hard)
         }
       })
       imagerequest.pipe(imageStream)
