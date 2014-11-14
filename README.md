@@ -26,6 +26,14 @@ When running their [console app](https://api.tumblr.com/console/calls/user/info)
 
 [Node Tumblr Package on NPM](https://www.npmjs.org/package/tumblr)
 
+[SQLITE3 on TutorialsPoint](http://www.tutorialspoint.com/sqlite/index.htm)
+
+[SQLite package on Github](https://github.com/mapbox/node-sqlite3)
+
+[SQLite package on NPM](https://www.npmjs.org/package/sqlite3)
+
+[SQLite wiki](https://github.com/mapbox/node-sqlite3/wiki)
+
 API Keys
 =======
 Add your api keys from [tumblr](http://www.tumblr.com/oauth/register) as environment variables. I stuck mine in my local ~/.bash_profile.
