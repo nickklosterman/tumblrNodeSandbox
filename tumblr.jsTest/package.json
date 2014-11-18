@@ -19,13 +19,13 @@
   "bugs": {
     "url": "https://github.com/nickklosterman/tumblrNodeSandbox/issues"
   },
-    "homepage": "https://github.com/nickklosterman/tumblrNodeSandbox",
-
-    "private": true,
-    "dependencies": {
-	"tumblr.js": "0.0.4",
-	"graceful-fs":"3.0.4",
-	"sqlite3":"3.0.4",
-	"request": "^2.47.0"
-    }
+  "homepage": "https://github.com/nickklosterman/tumblrNodeSandbox",
+  "private": true,
+  "dependencies": {
+    "graceful-fs": "3.0.4",
+    "mariasql": "^0.1.21",
+    "request": "^2.47.0",
+    "sqlite3": "3.0.4",
+    "tumblr.js": "0.0.4"
+  }
 }

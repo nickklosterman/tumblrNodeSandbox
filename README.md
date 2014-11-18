@@ -34,6 +34,10 @@ When running their [console app](https://api.tumblr.com/console/calls/user/info)
 
 [SQLite wiki](https://github.com/mapbox/node-sqlite3/wiki)
 
+[ mariasql on Github](https://github.com/mscdex/node-mariasql)
+
+[ mariasql on NPM](https://www.npmjs.org/package/mariasql)
+
 API Keys
 =======
 Add your api keys from [tumblr](http://www.tumblr.com/oauth/register) as environment variables. I stuck mine in my local ~/.bash_profile.

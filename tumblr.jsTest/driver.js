@@ -20,7 +20,7 @@ var foo = ['8bitmonkey','a1courier','alchemichael','alexhchung','alexkonstad','a
                             
 var foo2 = ['rafchu','fresherluke','milonogiannis','alchemichael','veesdumpingrounds','metalshell','lewsteph','scottwatanabe','jigokuen','jimjam-art','darcysart','kevinnelsonart','bentanart','pr1ps','jtowndraws','kr0npr1nz','chachachabela','chrissamnee','mitografia','dianmz','joverine','artissimo','alexkonstad','cheeks-74','mrjakeparker','billotomo','davidpetersenart','dheezen','gobi-baptiste-gaubert','ca-tsuka','evonyo','amyreeder','bentanart','anthonyholden','sirpangur','skirtzzz','shiyoonkim','sarapichelli','ottoghetto','probertson','loish','kylebaer','ttyto-alba','pixlotl','cartoonretro','gorrem','chhuy-ing','mtakara','raultrevino']
 
-var choice = 3
+var choice = 7
 switch(choice){
   case 1:
   foo.forEach(function(element,index,fullArray){
@@ -46,6 +46,36 @@ switch(choice){
   var client  = new TC({tumblrName:'rafchu',sqliteDatabaseFile:'TumblrDB.sqlite3'})
   client.setupSQLite3Database()
   client.savePostsToSQLiteDatabase()
+  break;
+
+  case 5:
+  foo.forEach(function(element,index,fullArray){
+    var client  = new TC({tumblrName:element})
+    client.analyzeNameLengths();
+  })
+  break;
+
+  case 6:
+  foo.forEach(function(element,index,fullArray){
+    var client  = new TC({tumblrName:element})
+    client.analyzeNameLengths();
+  })
+  break;
+  
+  case 7:
+  console.log(process.env.MARIA_HOST)
+  console.log(process.env.MARIA_USER)
+  console.log(process.env.MARIA_PASSWORD)
+  console.log(process.env.MARIA_DATABASE)
+  var client  = new TC({tumblrName:'rafchu',
+                        mariaHost:process.env.MARIA_HOST,
+                        mariaUser:process.env.MARIA_USER,
+                        mariaPassword:process.env.MARIA_PASSWORD,
+                        mariaDatabase:process.env.MARIA_DATABASE})
+  //client.insertDataIntoMariaDatabase()
+  //  client.closeMariaDatabase()
+  client.mariaInsert();
+//  client.mariaEnd();
   break;
 }
 
