@@ -57,7 +57,7 @@ function TumblrConnection(parameters){
                               db:this.mariaDatabase})
     
     this.mariaClient.on('connect', function() {
-      console.log('Client connected');
+      //console.log('Client connected');
     })
     .on('error', function(err) {
       console.log('Client error: ' + err);
@@ -65,6 +65,13 @@ function TumblrConnection(parameters){
     .on('close', function(hadError) {
       console.log('Client closed');
     });
+
+    //maria client passed in to prevent too many connections being made
+    //    if (typeof parameters['mariaClient'] !== 'undefined'){
+    if (parameters['mariaClient']){
+      process.stdout.write("using mariaclient")
+      this.mariaClient = parameters['mariaClient']
+    }
 
     //tumblrName: the blog name
     //post: the post name
@@ -89,7 +96,7 @@ function TumblrConnection(parameters){
     //     console.log('Result error: ' + inspect(err));
     //   })
     //   .on('end', function(info) {
-    //     console.log('Result finished successfully');
+    //    /* console.log('Result finished successfully'); */
     //   });
     // })
     // .on('end', function() {
@@ -109,7 +116,7 @@ function TumblrConnection(parameters){
     //     console.log('Result error: ' + inspect(err));
     //   })
     //   .on('end', function(info) {
-    //     console.log('Result finished successfully');
+    //    /* console.log('Result finished successfully'); */
     //   });
     // })
     // .on('end', function() {
@@ -140,7 +147,7 @@ TumblrConnection.prototype.mariaFindFileDeletions = function ()  {
       fs.exists(filename,function(exists){
         util.debug(filename+" exists:"+exists)
         if (exists===false) {
-          //          util.debug(filename+" exists")
+          // util.debug(filename+" exists")
           that.mariaClient.query('UPDATE Posts SET deleted=true WHERE imageURL="'
                                 +thisrow['imageURL']
                                 +'" AND tumblrName="'
@@ -155,7 +162,7 @@ TumblrConnection.prototype.mariaFindFileDeletions = function ()  {
             console.log('Result error: ' + inspect(err));
           })
           .on('end', function(info) {
-            console.log('Result finished successfully');
+            /* console.log('Result finished successfully'); */
           });
         } else {
           util.debug(filename+" exists, not updating")
@@ -166,7 +173,7 @@ TumblrConnection.prototype.mariaFindFileDeletions = function ()  {
       console.log('Result error: ' + inspect(err));
     })
     .on('end', function(info) {
-      console.log('Result finished successfully');
+      /* console.log('Result finished successfully'); */
     });
   })
   .on('end', function() {
@@ -186,7 +193,7 @@ TumblrConnection.prototype.scanLocalDirectory = function(){
   if (files){
     //console.log(files)
     files.forEach(function(element,index,fullArray){
-      console.log(element)
+      //console.log(element)
       that.decomposeFilename(element)
     })
   }
@@ -235,6 +242,7 @@ TumblrConnection.prototype.decomposeFilename = function(filename){
 }
 //
 // Download and save image file; used in conjunction with query from mariadb
+// updates db after image fully downloaded
 //
 TumblrConnection.prototype.mariaSaveFile = function(filename,url){
   var that = this;
@@ -281,17 +289,18 @@ TumblrConnection.prototype.mariaSaveFile = function(filename,url){
 //
 TumblrConnection.prototype.mariaUpdateDownloaded = function(url) {
   var that = this
-  this.mariaClient.query('UPDATE Posts SET download=true WHERE imageURL="'+url+'"')
+  this.mariaClient.query('UPDATE Posts SET downloaded=true WHERE imageURL="'+url+'"')
   .on('result',function(res) {
     //I need to know what the 
-    console.log(res) 
+    //console.log(res) 
+    util.debug("update of download complete")
   })
   .on('error', function(err) {
     console.log('Result error: ' + inspect(err));
     that.mariaUpdateDownloaded(url)
   })
   .on('end', function(info) {
-    console.log('Result finished successfully');
+    /* console.log('Result finished successfully'); */
   });
 }
 
@@ -310,18 +319,23 @@ TumblrConnection.prototype.mariaQuery = function () {
       console.log('Result error: ' + inspect(err));
     })
     .on('end', function(info) {
-      console.log('Result finished successfully');
+      /* console.log('Result finished successfully'); */
     });
   })
   .on('end', function() {
-    console.log('Done with all results');
+    process.stdout.write("-")
+    //console.log('Done with all results');
   });
+}
+
+TumblrConnection.prototype.mariaInsertAndDownload  = function ()  {
+  this.mariaInsert(true)
 }
 
 //
 // insert tubmlr image record into mariadb if there is no 
 //
-TumblrConnection.prototype.mariaInsert = function() {
+TumblrConnection.prototype.mariaInsert = function(downloadBoolean) {
   var that = this
   this.client.posts(this.tumblrURL, function(err,data) {
     if (err) {
@@ -342,48 +356,70 @@ TumblrConnection.prototype.mariaInsert = function() {
                 res.on('row', function(row) {
                   //console.log('Result row: ' + inspect(row));
                   //console.log(row['COUNT(*)'])
+                  //util.debug(row['COUNT(*)'])
                   if (row['COUNT(*)'] == 0 ) {
                     //that.mariaClient.query('INSERT INTO Posts (tumblrName,post,imageURL,imageFilename,deleted,json,duplicate) VALUES ("?","?","?","?","?","?","?")',that.tumblrName,"nothing",url,imageFilename,false,"-",false) //this inserts question marks
                     //that.mariaClient.query('INSERT INTO Posts (tumblrName,post,imageURL,imageFilename,deleted,json,duplicate) VALUES (?,?,?,?,?,?,?)',that.tumblrName,"nothing",url,imageFilename,false,"-",false)
                     //that.mariaClient.query('INSERT INTO Posts SET ?',{tumblrName:that.tumblrName,post:"nothing",imageURL:url,imageFilename:imageFilename,deleted:false,json:"-",duplicate:false})
-                    that.mariaClient.query('INSERT INTO Posts (tumblrName,post,imageURL,imageFilename,deleted,json,duplicate) VALUES ("'+that.tumblrName+'","'+slug+'","'+url+'","'+imageFilename+'",'+false+',"-",'+false+')')
+                    util.debug('INSERT INTO Posts (tumblrName,post,imageURL,imageFilename,deleted,json,duplicate) VALUES ("'+that.tumblrName+'","'+slug+'","'+url+'","'+imageFilename+'",'+false+',"-",'+false+')')
+                    if (typeof downloadBoolean !== 'undefined'
+                      && downloadBoolean === true) {
+                      that.mariaSaveFile(filename,url)
+                    }
+
+                    that.mariaClient.query('INSERT INTO Posts (tumblrName,post,imageURL,imageFilename,deleted,json,duplicate,downloaded) '
+                                          + 'VALUES ("'+that.tumblrName+'","'+slug+'","'+url+'","'+imageFilename+'",false,"-",false,false)')
                     .on('result', function(res) {
                       res.on('row', function(row) {
+                        ///
+                        /// This is not being hit
+                        ///
                         console.log('Insert Result row: ' + inspect(row));
+                        if (typeof downloadBoolean !== 'undefined'
+                          && downloadBoolean === true) {
+                          that.mariaSaveFile(filename,url)
+                        }
                       })
                       .on('error', function(err) { console.log('Result error: ' + inspect(err));})
-                      .on('end', function(info) { console.log('Result finished successfully'); });
+                      .on('end', function(info) {/* console.log('Result finished successfully'); */ });
                     })
-                    .on('end', function() {console.log('Done with all results');}); //Insert into Posts....
+                    .on('end', function() {process.stdout.write('*'); /*console.log('Done with all results');*/}); //Insert into Posts....
                     
                   } else {
                     //if the image was already entered, perform more in depth query to see if the post would be a duplicate
-                    util.debug("imageFilename:"+imageFilename+" tumblrName:"+that.tumblrName+" slug:"+slug)
-                    that.mariaClient.query('SELECT COUNT(*) FROM Posts WHERE imageFilename = "'+imageFilename+'" AND tumblrName = "'+that.tumblrName+'" AND post = "'+slug+'"')
+                    //util.debug(imageFilename+" present.")
+                    //util.debug("imageFilename:"+imageFilename+" tumblrName:"+that.tumblrName+" slug:"+slug)
+                    that.mariaClient.query('SELECT COUNT(*) FROM Posts '
+                                          + 'WHERE imageFilename = "'+imageFilename
+                                          +'" AND tumblrName = "'+that.tumblrName
+                                          +'" AND post = "'+slug+'"')
                     .on('result', function(res) {
                       res.on('row', function(row) {
                         if (row['COUNT(*)'] == 0 ) {
-                          that.mariaClient.query('INSERT INTO Posts (tumblrName,post,imageURL,imageFilename,deleted,json,duplicate) VALUES ("'+that.tumblrName+'","nothing","'+url+'","'+imageFilename+'",'+false+',"-",'+true+')')
+                          that.mariaClient.query('INSERT INTO Posts (tumblrName,post,imageURL,imageFilename,deleted,json,duplicate,downloaded) '
+                                                + 'VALUES ("'+that.tumblrName+'","nothing","'+url+'","'+imageFilename+'",false,"-",true,false)')
                           .on('result', function(res) {
                             res.on('row', function(row) { console.log('Insert Result row: ' + inspect(row)); })
                             .on('error', function(err) { console.log('Result error: ' + inspect(err)); })
-                            .on('end', function(info) { console.log('Result finished successfully'); });
+                            .on('end', function(info) {/* console.log('Result finished successfully'); */ });
                           })
-                          .on('end', function() { console.log('Done with all results'); });
+                          .on('end', function() {process.stdout.write('^'); /*console.log('Done with all results');*/ });
                         } else {
-                          console.log("Duplicate post prevented")
+                          //console.log("Duplicate post prevented")
+                          process.stdout.write("D")
+                          
                         }
                       })
                       .on('error', function(err) { console.log('Result error: ' + inspect(err)); })
-                      .on('end', function(info) { console.log('Result finished successfully'); });
+                      .on('end', function(info) {/* console.log('Result finished successfully'); */ });
                     })
-                    .on('end', function() { console.log('Done with all results');});
+                    .on('end', function() { process.stdout.write('$'); /*console.log('Done with all results');*/});
                   }
                 }) // triggers for initial Result of Select Count(*)
                 .on('error', function(err) {console.log('Result error: ' + inspect(err)); })
-                .on('end', function(info) { console.log('Result finished successfully'); });
+                .on('end', function(info) {/* console.log('Result finished successfully'); */ });
               }) // trigger for select Count(*)
-              .on('end', function() { console.log('Done with all results'); });
+              .on('end', function() { process.stdout.write('!'); /*console.log('Done with all results');*/ });
               //              that.mariaClient.end()
 
               // that.mariaClient.query(that.mariaInsertPQ(that.tumblrName,"nothing",url,imageFilename,false,"-",false))
@@ -395,7 +431,7 @@ TumblrConnection.prototype.mariaInsert = function() {
               //     console.log('Result error: ' + inspect(err));
               //   })
               //   .on('end', function(info) {
-              //     console.log('Result finished successfully');
+              //    /* console.log('Result finished successfully'); */
               //   });
               // })
               // .on('end', function() {
@@ -664,4 +700,5 @@ module.exports = TumblrConnection
 
 //todo check disk space  use : https://www.npmjs.org/package/diskspace
 //todo: bypass the API and grab rss feeds.
-//todo allow specification of the ouptut directory
+//todo: allow specification of the ouptut directory
+//todo: save post to a separate db with tumblrName and slug; otherwise repeating saving of post.
