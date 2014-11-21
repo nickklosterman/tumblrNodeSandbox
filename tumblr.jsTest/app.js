@@ -2,29 +2,47 @@
 
 var fs = require('graceful-fs'),
     request = require('request'),
-    util = require('util')
-var inspect = require('util').inspect
+    util = require('util'),
+    inspect = require('util').inspect
+var diskspace = require('diskspace')
 var mariasql = require('mariasql')
 var tumblr = require('tumblr.js');
 var sqlite3 = require("sqlite3").verbose() //is there a way to only condiitonally include this as all users won't need it?
 
 //var diskspace = require('diskspace')
 
+// Parameters:
+// -tumblrName (required)
+// -diskSpaceMinimum (optional) 
+// -sqliteDatabaseFile (optional)
+// -mariaHost, mariaUser, mariaPassword, mariaDatabase (optional) but all are needed for successful connection
+// -mariaClient - instantiated mariaDB connection
 function TumblrConnection(parameters){ 
   this.tumblrName=parameters['tumblrName']
   if (typeof parameters['tumblrName'] === 'undefined'){
     throw new Error('Missing required parameter: tumblrName.');
   }
   this.tumblrURL=this.tumblrName+".tumblr.com" //naive url grabbing
-  this.client = tumblr.createClient({
-    consumer_key: process.env.TUMBLR_CONSUMER_KEY,
-    consumer_secret: process.env.TUMBLR_SECRET_KEY, 
-    token: process.env.TUMBLR_TOKEN,
-    token_secret: process.env.TUMBLR_TOKEN_SECRET
-  });
 
-  // disk space minimum to check for and key off of
-  this.diskspaceMinimum = (parameters['diskspaceMinimum']) ? parameters['diskspaceMinimum'] : 10
+  if ( typeof process.env.TUMBLR_CONSUMER_KEY !== 'undefined'
+    && typeof process.env.TUMBLR_SECRET_KEY !== 'undefined'
+    && typeof process.env.TUMBLR_TOKEN !== 'undefined'
+    && typeof process.env.TUMBLR_TOKEN_SECRET!== 'undefined'
+     ){
+    this.client = tumblr.createClient({
+      consumer_key: process.env.TUMBLR_CONSUMER_KEY,
+      consumer_secret: process.env.TUMBLR_SECRET_KEY, 
+      token: process.env.TUMBLR_TOKEN,
+      token_secret: process.env.TUMBLR_TOKEN_SECRET
+    });
+  } else {
+    throw new Error("Missing one or more Tumblr Api keys")
+  }
+
+  // disk space minimum in gigabytes to check for and key off of
+  // this really belongs in a parent class along with the mariadb connection as it doesn't change on a per username basis
+  this.diskSpaceMinimum = (parameters['diskSpaceMinimum']) ? parameters['diskSpaceMinimum']*1000000000 : 1000000000
+  this.checkDiskSpace()
 
   // file specifiying the sqlite database 
   this.sqliteDatabaseFile = (parameters['sqliteDatabaseFile']) ? parameters['sqliteDatabaseFile'] : ''
@@ -65,65 +83,14 @@ function TumblrConnection(parameters){
     .on('close', function(hadError) {
       console.log('Client closed');
     });
-
-    //maria client passed in to prevent too many connections being made
-    //    if (typeof parameters['mariaClient'] !== 'undefined'){
-    if (parameters['mariaClient']){
-      process.stdout.write("using mariaclient")
-      this.mariaClient = parameters['mariaClient']
-    }
-
-    //tumblrName: the blog name
-    //post: the post name
-    //imageURL: the url of the image
-    //deleted: boolean field for marking if the file was deleted locally
-    //json: the full post data returned from the api
-    //duplicate: boolean denoting if the image was referenced elsewhere (reblogged image)
-    // this.mariaClient.query('CREATE TABLE IF NOT EXISTS Posts (tumblrName VARCHAR(50) CHARACTER SET utf8,'
-    //                       + 'post VARCHAR(70) CHARACTER SET utf8,'
-    //                       + 'imageURL VARCHAR(110) CHARACTER SET utf8,'
-    //                       + 'imageFilename VARCHAR(50) CHARACTER SET utf8,'
-    //                       + 'deleted BOOLEAN,'
-    //                       + 'json BLOB,' //the full posts could be in the 10k+ character range
-    //                       + 'duplicate BOOLEAN)')
-
-    // this.mariaClient.query('SELECT * FROM Posts')
-    // .on('result', function(res) {
-    //   res.on('row', function(row) {
-    //     console.log('Result row: ' + inspect(row));
-    //   })
-    //   .on('error', function(err) {
-    //     console.log('Result error: ' + inspect(err));
-    //   })
-    //   .on('end', function(info) {
-    //    /* console.log('Result finished successfully'); */
-    //   });
-    // })
-    // .on('end', function() {
-    //   console.log('Done with all results');
-    // });
-
-    //    this.mariaClient.end();
-    //    this.mariaInsertPQ=that.mariaClient('INSERT INTO Posts VALUES (?,?,?,?,?,?,?)')
-    //  this.mariaSelectMatchImageFilenamePQ=that.mariaClient('SELECT COUNT(*) FROM Posts WHERE imageFilename = "?"')
-
-    // this.mariaClient.query('SELECT COUNT(*) FROM Posts')
-    // .on('result', function(res) {
-    //   res.on('row', function(row) {
-    //     console.log('Result row: ' + inspect(row));
-    //   })
-    //   .on('error', function(err) {
-    //     console.log('Result error: ' + inspect(err));
-    //   })
-    //   .on('end', function(info) {
-    //    /* console.log('Result finished successfully'); */
-    //   });
-    // })
-    // .on('end', function() {
-    //   console.log('Done with all results');
-    // });
-
   }
+
+  //maria client passed in to prevent too many connections being made
+  //    if (typeof parameters['mariaClient'] !== 'undefined'){
+  if (parameters['mariaClient']){
+    process.stdout.write("using mariaclient")
+    this.mariaClient = parameters['mariaClient']
+  } 
 
 }
 
@@ -156,7 +123,9 @@ TumblrConnection.prototype.mariaFindFileDeletions = function ()  {
           .on('result',function(res) {
             //I need to know that the result is successful
             //console.log(res) 
-            // I really have no idea what to parse out of the response 
+            // I really have no idea what to parse out of the response as it 
+            // appears to really give results of the query, which since it was successfull to get 
+            // to this point, doesn't really warrant posting the response.
           })
           .on('error', function(err) {
             console.log('Result error: ' + inspect(err));
@@ -337,6 +306,7 @@ TumblrConnection.prototype.mariaInsertAndDownload  = function ()  {
 //
 TumblrConnection.prototype.mariaInsert = function(downloadBoolean) {
   var that = this
+  //console.log(this)
   this.client.posts(this.tumblrURL, function(err,data) {
     if (err) {
       console.log(that.tumblrURL+"-"+err)
@@ -351,6 +321,7 @@ TumblrConnection.prototype.mariaInsert = function(downloadBoolean) {
               var imageFilename = splitURL[splitURL.length-1]
               var filename = that.tumblrName+"_"+slug+"_"+imageFilename
               //              that.mariaClient.query('SELECT COUNT(*) FROM Posts WHERE imageFilename = ?',imageFilename)
+              //console.log(that)
               that.mariaClient.query('SELECT COUNT(*) FROM Posts WHERE imageFilename = "'+imageFilename+'"')
               .on('result', function(res) {
                 res.on('row', function(row) {
@@ -688,7 +659,21 @@ TumblrConnection.prototype.closeSQLite3Database = function() {
 }
 //create another library to handle creation of the db?
 
-TumblrConnection.prototype.checkDiskSpace = function() {
+TumblrConnection.prototype.checkDiskSpace = function () {
+  //console.log("check")
+  var that =this
+  diskspace.check('/home', function (err, total, free, status) {
+    //    console.log(total+" free:"+free)
+    //  console.log("total:"+total+" free:"+free)
+    if (free<that.diskSpaceMinimum) {
+      throw new Error("Disk Space too low.\n"+free+" bytes required\n"+that.diskSpaceMinimum+" bytes free.")
+      
+    } else {
+      //      console.log("free")
+      //    console.log(free)
+      //  console.log(that.diskSpaceMinimum)
+    }
+  });
 }
 
 

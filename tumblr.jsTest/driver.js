@@ -173,7 +173,6 @@ switch(choice){
     console.log('Client closed');
   });
 
-
   foo.forEach(function(element,index,fullArray){
     var client  = new TC({tumblrName:element,
                           mariaClient:mariaClient
@@ -187,6 +186,12 @@ switch(choice){
   })
   break;
 
+  case 13:
+  // Test checking of diskspace
+  var client  = new TC({tumblrName:'artissimo',
+                        diskSpaceMinimum:5.4
+                       })
+  break;
 
   default:
   console.log("invalid option")

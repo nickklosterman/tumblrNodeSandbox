@@ -22,6 +22,7 @@
   "homepage": "https://github.com/nickklosterman/tumblrNodeSandbox",
   "private": true,
   "dependencies": {
+    "diskspace": "^0.1.7",
     "graceful-fs": "3.0.4",
     "mariasql": "^0.1.21",
     "request": "^2.47.0",
