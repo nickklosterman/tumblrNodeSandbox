@@ -683,7 +683,8 @@ module.exports = TumblrConnection
 // }
 
 
-//todo check disk space  use : https://www.npmjs.org/package/diskspace
+
 //todo: bypass the API and grab rss feeds.
 //todo: allow specification of the ouptut directory
 //todo: save post to a separate db with tumblrName and slug; otherwise repeating saving of post.
+//todo: readdir vs fileexists; or download all to a temp dir then post process. or get all file names, compare to those present in a directory listing
