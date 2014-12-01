@@ -212,6 +212,21 @@ case 14:
     })
     
     break;
+case 15:
+    foo.forEach(function(element,index,fullArray){
+	var client  = new TC({tumblrName:element})
+	client.saveXMLFeedFile();
+    })
+    
+    break;
+case 16:
+    foo.forEach(function(element,index,fullArray){
+	var client  = new TC({tumblrName:element})
+	client.saveJSONFeedFile();
+	//would need to JSON.parse to get at results if reading from file
+    })
+    
+    break;
     
 default:
     console.log("invalid option")

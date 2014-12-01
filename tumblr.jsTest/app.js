@@ -506,10 +506,24 @@ TumblrConnection.prototype.savePostImages = function() {
   })
 }
 
-
 TumblrConnection.prototype.saveRssFile = function(){
     var url = "http://"+this.tumblrName+".tumblr.com/rss" //this is naive and may not work for all; e.g. pinuparena
-    var filename=this.tumblrName+".rss"
+    this.saveFeedFile(url,".rss");
+}
+
+TumblrConnection.prototype.saveXMLFeedFile = function(){
+    url = "http://"+this.tumblrName+".tumblr.com/api/read"
+    this.saveFeedFile(url,".xml");
+}
+TumblrConnection.prototype.saveJSONFeedFile = function(){
+    url = "http://"+this.tumblrName+".tumblr.com/api/read/json"
+    this.saveFeedFile(url,".json");
+
+}
+
+TumblrConnection.prototype.saveFeedFile = function(url,extension){
+   
+    var filename=this.tumblrName+extension
     var that = this;
     if ( fs.existsSync(filename) ) {
 	//console.log(filename+" already exists. Skipping.")
