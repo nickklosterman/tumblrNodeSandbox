@@ -507,6 +507,50 @@ TumblrConnection.prototype.savePostImages = function() {
 }
 
 
+TumblrConnection.prototype.saveRssFile = function(){
+    var url = "http://"+this.tumblrName+".tumblr.com/rss" //this is naive and may not work for all; e.g. pinuparena
+    var filename=this.tumblrName+".rss"
+    var that = this;
+    if ( fs.existsSync(filename) ) {
+	//console.log(filename+" already exists. Skipping.")
+	process.stdout.write("A")
+    } else {
+	process.stdout.write("W")
+    }
+    
+    var fileStream=fs.createWriteStream(filename,{flags:'a'})
+    fileStream.on('close',function(){
+        //	fileStream.on('end',function(){
+        console.log("Writing of "+filename+" done.")
+    })
+
+    var options = {url:url,headers:{ 'User-Agent':'request'}}
+    var that = this
+    var filerequest=request(options,function(err,resp,body) {
+        if (err){
+	    if (err.code === 'ECONNREFUSED') {
+		console.error(url+' Refused connection');
+	    } else if (err.code==='ECONNRESET') {
+		console.error(url+' reset connection')
+	    } else if (err.code==='ENOTFOUND') {
+		console.error(url+' enotfound')
+	    } else {
+		console.log(url+err);
+		console.log(err.stack);
+	    }
+	    that.saveRssFile(element,slug);//call ourself again if there was an error (mostlikely due to hitting the server too hard)
+	}
+    })
+    fileStream.on('error',function(error) {
+        if (error) {
+            console.log("fileStream error:"+error)
+            that.saveRssFile(element,slug);//call ourself again if there was an error (mostlikely due to hitting the server too hard)
+        }
+    })
+    filerequest.pipe(fileStream)
+}
+
+
 TumblrConnection.prototype.saveFile = function(element,slug){
   if (typeof element.alt_sizes !== 'undefined' && element.alt_sizes.length > 0) {
     var url = element.alt_sizes[0].url
