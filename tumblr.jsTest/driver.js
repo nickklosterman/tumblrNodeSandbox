@@ -263,9 +263,9 @@ case 17: //read tumblr names from a file and process
     var callback = function(element,index) {
 	setTimeout(function() {
 	    var client  = new TC({tumblrName:element,
-				  diskSpaceMinimum:0.5})
+				  diskSpaceMinimum:0.35})
 	    client.savePostImages();
-	},500*index);
+	},500*index); //you will need to adjust the timeout interval higher when more files are being written or the write process will fail as you will exceed the number of open files and you will have files created with zero length.
 	
     };
     var that = this;

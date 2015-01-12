@@ -20,7 +20,7 @@ var sqlite3 = require("sqlite3").verbose() //is there a way to only condiitonall
 function TumblrConnection(parameters){ 
   this.tumblrName=parameters['tumblrName']
   if (typeof parameters['tumblrName'] === 'undefined'){
-    throw new Error('Missing required parameter: tumblrName.');
+    throw Error('Missing required parameter: tumblrName.');
   }
   this.tumblrURL=this.tumblrName+".tumblr.com" //naive url grabbing
 
@@ -36,7 +36,7 @@ function TumblrConnection(parameters){
       token_secret: process.env.TUMBLR_TOKEN_SECRET
     });
   } else {
-    throw new Error("Missing one or more Tumblr Api keys")
+    throw Error("Missing one or more Tumblr Api keys")
   }
 
   // disk space minimum in gigabytes to check for and key off of
@@ -627,7 +627,7 @@ TumblrConnection.prototype.setupMariaDatabase = function (){
 }
 TumblrConnection.prototype.setupSQLite3Database = function (){
   if (this.sqliteDatabaseFile === ''){
-    throw new Error('Invalid or Missing required parameter: sqliteDatabaseFile.');
+    throw Error('Invalid or Missing required parameter: sqliteDatabaseFile.');
   } else {
     //console.log(this.sqliteDatabaseFile)
   }
@@ -655,7 +655,7 @@ TumblrConnection.prototype.setupSQLite3Database = function (){
 TumblrConnection.prototype.insertSQLite3Database = function (){
   if (this.sqliteDB === {}){
     console.log(this)
-    throw new Error(' sqliteDB not initialized')
+    throw Error(' sqliteDB not initialized')
   }
   var stmt = this.sqliteDB.prepare("INSERT INTO Tumblr VALUES (?,?,?,?)")
   stmt.run(this.tumblrName,post,url,false)
@@ -668,7 +668,7 @@ TumblrConnection.prototype.bulkInsertSQLite3Database = function(postArray) {
     || typeof this.sqliteDB === 'undefined'){
     //    console.log(this)
     //    console.log("this.sqliteDB:"+this.sqliteDB)
-    throw new Error('sqliteDB not initialized')
+    throw Error('sqliteDB not initialized')
   }
   //  console.log("bulkinsert")
 
@@ -724,7 +724,7 @@ TumblrConnection.prototype.checkDiskSpace = function () {
     //    console.log(total+" free:"+free)
     //  console.log("total:"+total+" free:"+free)
     if (free<that.diskSpaceMinimum) {
-      throw new Error("Disk Space too low.\n"+free+" bytes required\n"+that.diskSpaceMinimum+" bytes free.")
+      throw Error("Disk Space too low.\n"+that.diskSpaceMinimum+" bytes required\n"+free+" bytes free.")
       
     } else {
       //      console.log("free")
