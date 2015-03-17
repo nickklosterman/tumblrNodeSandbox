@@ -574,7 +574,7 @@ TumblrConnection.prototype.saveFile = function(element,slug){
     var that = this;
     if ( fs.existsSync(filename) ) {
       //console.log(filename+" already exists. Skipping.")
-      process.stdout.write("X")
+      //process.stdout.write("X")
     } else {
       var imageStream=fs.createWriteStream(filename)
       imageStream.on('close',function(){
@@ -720,7 +720,9 @@ TumblrConnection.prototype.closeSQLite3Database = function() {
 TumblrConnection.prototype.checkDiskSpace = function () {
   //console.log("check")
   var that =this
-  diskspace.check('/home', function (err, total, free, status) {
+
+//  diskspace.check('/home', function (err, total, free, status) {
+  diskspace.check('/Users', function (err, total, free, status) {
     //    console.log(total+" free:"+free)
     //  console.log("total:"+total+" free:"+free)
     if (free<that.diskSpaceMinimum) {

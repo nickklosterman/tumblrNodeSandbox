@@ -59,7 +59,6 @@ bethanyberg
 bethcraig
 billotomo
 bitchplanet
-blackjunkgallery
 blackyjunkgallery
 blindsprings
 blythedockham
@@ -269,7 +268,7 @@ kr0npr1nz
 kristaferanka
 kristinkemper
 kulorbandit
-kurtisweibe
+kurtiswiebe
 kwonshell
 kylebaer
 la-vaniteuse
@@ -513,7 +512,7 @@ kinuck
 matthieuforichon
 BrianneDrouhard
 GiuseppeCristiano
-rodreisart
+rodreisartist
 jpkalonjiart
 justinchan
 justincoffee
@@ -545,3 +544,10 @@ artofthetitle
 alexneonakis
 camarasketch
 comicsalliance
+nargyle
+ryannotbrian
+thecommaspace
+iasketchblog
+maxdunbar
+ctchrysler
+
