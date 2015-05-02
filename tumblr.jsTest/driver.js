@@ -280,11 +280,15 @@ case 17: //read tumblr names from a file and process
 		    console.log(data)
 		    var temp = data.split('\n')
 		    temp.forEach(function(element,index,array){
-			if (element.length>0){
-			    console.log(element+' '+index);
-			    callback(element,index);
+			if (element[0] !=="#")  {
+			    if (element.length>0){
+				console.log(element+' '+index);
+				callback(element,index);
+			    } else {
+				console.log("zero length entry")
+			    }
 			} else {
-			    console.log("zero length entry")
+			    console.log("Skipping "+element.split('#'));
 			}
 		    })
 		    //var tumblrListFromDisk = JSON.parse(data);
