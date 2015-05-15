@@ -6,5 +6,5 @@ read someChar
 while read line
 do 
     echo ;
-    rm ${line}.* ;
+    rm ${line}*.* ;
 done < ../tumblrListUniq.txt
