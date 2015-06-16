@@ -83,12 +83,10 @@ brokenlynx21
 brotherhoodoftofuv2
 bryankonietzko
 bub-x
-bub-x
 ca-tsuka
 camarasketch
 cameron-stewart
 captain-laowa
-carolinegariba
 carolinegariba
 carrececile
 cartoonhangover
@@ -110,9 +108,9 @@ chrislamart
 chrispimentel
 chrissamnee
 chuanong
+chuckgroenick
 chuwenjie
 clairewendlingblog
-clemenceperrault
 clemenceperrault
 cliffchiang
 cliobablio
@@ -199,6 +197,7 @@ francoyovich
 freelance-sharkbaby
 fresherluke
 fryingtoilet
+fsacre 
 fuckyeahconceptcarz
 fuckyeahfrankcho
 ful-fisk
@@ -252,6 +251,7 @@ isthatwhatyoumint
 it8bit
 izalix
 j0elg
+jakewyattriot
 jameshance
 jarvisink
 jasonlatour
@@ -294,6 +294,7 @@ karladiazc
 karlkerschl
 kassandraheller
 katikut
+keaneart
 kendrasketch
 kenimation
 kevinnelsonart
@@ -317,6 +318,7 @@ la-vaniteuse
 labofakto
 ladugard
 ladytruds
+larrymacdougallart
 laserena
 lebelgebd
 lee-tao
@@ -451,7 +453,7 @@ requiemdusk
 rileyrossmo
 robertvalley
 rodreisartist
-rodreisartist
+rouaroua
 royalboiler
 rubyspoon
 rufftoon
