@@ -4,6 +4,7 @@ BrianneDrouhard
 GiuseppeCristiano
 a1courier
 abbydraws
+adamkubert
 adigranovart
 adrien-gromelle
 adultswimcentral
@@ -15,6 +16,7 @@ alchemichael
 alexandrediboine
 alexhchung
 alexkonstad
+alexmaleev
 alexneonakis
 aliceduke
 alicexz
@@ -60,7 +62,6 @@ bbrunoliveira
 bdligneclaire
 bear1na
 bearmantooth
-bearmantooth
 beautiful-wildlife
 beckycloonan
 beiibis
@@ -84,6 +85,7 @@ bouletcorp
 brandnewnostalgia
 breebird33
 brentschoonover
+brentsgifs
 brianmichaelbendis
 britt315
 brokenlynx21
@@ -172,6 +174,7 @@ doodlebags
 drawnbydana
 drawstin
 drdavidmrmack
+dribbb
 dropdeadsuit
 drunkennovice
 dshalv
@@ -273,7 +276,6 @@ jasonlatour
 jbaxteranimator
 jeanlaine
 jeffstokely
-jeffstokely
 jenessawarren
 jenniferely
 jessihasbeans
@@ -320,7 +322,6 @@ kevinwada
 kheleksul
 kidskribble
 kinopia
-kinuck
 kinuck
 knightandknights
 kovvu
@@ -408,6 +409,8 @@ moonbotstudios
 mopka
 moremonger
 morganjeske
+motionmarkus
+mrbreitweiser
 mrgossie
 mrjakeparker
 mtakara
@@ -422,6 +425,8 @@ nebezial-asheri
 necropoliscomic
 neilgooge
 ner-tamin
+nesskain
+nesskaintips
 nickdragotta
 nickpitarra
 nicolasdelort
@@ -473,7 +478,6 @@ raultrevino
 redbubble
 reiquintero
 reneechio
-reneechio
 requiemdusk
 rileyrossmo
 robertkondo
@@ -505,6 +509,7 @@ shinmakoss
 shinypant
 shiyoonkim
 shrzrebelka
+shzrebelka
 sibyllinesketchblog
 silversd
 simplysaraart
@@ -566,6 +571,7 @@ tobycypress
 tofuvi
 tomfowlerddd
 tomfowlerstuff
+tomhaugomat
 tomsawyr
 toniinfante
 tonybrescini
@@ -615,3 +621,5 @@ zenpencils
 zirese
 zobobafoozie
 zorinvasili
+
+

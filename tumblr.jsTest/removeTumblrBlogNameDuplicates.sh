@@ -3,8 +3,5 @@
 echo "this script will delete ALL files whose prefix is read from tumblrListUniq.txt!"
 echo "enter a character to continue or quit (Ctrl-C) now"
 read someChar
-while read line
-do 
-    echo ;
-    rm ${line}*.* ;
-done < ../tumblrListUniq.txt
+sort tumblrListUniq.txt | uniq -u > /tmp/tlU.txt.uniq
+mv /tmp/tlU.txt.uniq tumblrListUniq.txt
