@@ -506,6 +506,25 @@ TumblrConnection.prototype.savePostImages = function() {
   })
 }
 
+//It looks like Tumblr typically just allows outside links. So this would just save off links and I'd need to then 
+TumblrConnection.prototype.savePostVideos = function() {
+  var that = this
+  this.client.posts(this.tumblrURL, function(err,data) {
+    if (err) {
+      console.log(that.tumblrURL+"-"+err)
+    } else {
+      data.posts.forEach(function(element,index,fullArray) {
+        var slug  = element.slug
+/*        if (typeof element.player !== 'undefined') {
+          element.photos.forEach(function(element,index,fullArray) {
+            that.saveFile(element,slug)
+          })
+        }*/
+      })
+    }
+  })
+}
+
 TumblrConnection.prototype.saveRssFile = function(){
     var url = "http://"+this.tumblrName+".tumblr.com/rss" //this is naive and may not work for all; e.g. pinuparena
     this.saveFeedFile(url,".rss");
