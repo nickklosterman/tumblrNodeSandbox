@@ -239,6 +239,7 @@ gorrem
 goworkouttv
 griselines
 grizandnorm
+guillaumefesquet
 gurihiru
 hammpix
 hannakdraws
@@ -361,6 +362,7 @@ lisaveeee
 littlepaperforest
 lizclimo
 loish
+lorhs
 losdemoniosdetony
 louiedelcarmen
 luckybeezz
@@ -382,6 +384,7 @@ marvelentertainment
 matiasberg
 matthieuforichon
 maxdunbar
+mayakern
 mayonose
 mbarq
 mcfarlandart
@@ -469,6 +472,7 @@ philnoto
 phobso
 pigswithcrayons
 pinuparena
+pinupgirlsart
 pixlotl
 pixmilk
 pointystix
@@ -479,6 +483,7 @@ probertson
 processresource
 pryce14
 qinni
+quinnecl
 rafchu
 ramonvillalobos
 raultrevino
@@ -568,6 +573,7 @@ thepaulrichards
 theseaofideas
 thewoodencrown
 thibaultleclercq
+thingiverse
 thingsiphotoshopped
 thomascampi
 thomaspitilli
@@ -630,6 +636,3 @@ zenpencils
 zirese
 zobobafoozie
 zorinvasili
-guillaumefesquet
-lorhs
-thingiverse
