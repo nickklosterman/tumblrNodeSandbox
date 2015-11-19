@@ -4,6 +4,7 @@ BrianneDrouhard
 GiuseppeCristiano
 a1courier
 abbydraws
+adafruit
 adamkubert
 adigranovart
 adrien-gromelle
@@ -369,11 +370,11 @@ maggins
 mahmudasrar
 maisonimmonen
 mallius
-markandrewsmith
 mankyseemankydo
 margueritesauvage
 mariethorhauger
 mariposa-nocturna
+markandrewsmith
 marlene-beaube
 marramew
 marvel1980s
@@ -536,6 +537,7 @@ sosuperawesome
 soufflevent
 souracid
 soyopanda
+sparkfunelectronics
 specialk73
 sporkii
 sqetches
@@ -628,5 +630,6 @@ zenpencils
 zirese
 zobobafoozie
 zorinvasili
-
-
+guillaumefesquet
+lorhs
+thingiverse
