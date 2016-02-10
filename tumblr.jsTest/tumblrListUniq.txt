@@ -4,6 +4,7 @@ BrianneDrouhard
 GiuseppeCristiano
 a1courier
 abbydraws
+adafruit
 adamkubert
 adigranovart
 adrien-gromelle
@@ -13,6 +14,7 @@ advicecomics
 afuchan
 aimeezhou
 alchemichael
+alejo-diaz
 alexandrediboine
 alexhchung
 alexkonstad
@@ -56,6 +58,7 @@ avasdemon
 azertip
 babsdraws
 badoum
+barachan
 barachan
 barbaracanepa
 bastien-coolashu
@@ -106,6 +109,7 @@ cclog
 celine-kim
 celorart
 chachachabela
+chamonkee
 charactermodel
 charamath
 charlesbad
@@ -127,9 +131,11 @@ cliffchiang
 cliobablio
 cobaltplasma
 codaleia
+codyvrosh
 coelacanthtea
 colemanengle
 colleencoover
+colorcorallo
 colordrug
 colours-theory
 comicartappreciation
@@ -153,6 +159,7 @@ curioos-arts
 cxcfestival
 danaterrace
 danbeaulieu
+daniolart
 darcysart
 darksideof
 davidlafuente
@@ -163,6 +170,7 @@ deanheezen
 deantrippe
 deathherald
 deep-dark-fears
+denaesketch
 denismedri
 deviantart
 dgeorgecox
@@ -225,6 +233,7 @@ gameraboy
 geersart
 gelipetorres
 geminiloveskorea
+gh-graphics
 gigidigi
 gingerhaze
 giorgiobaroni
@@ -238,6 +247,7 @@ gorrem
 goworkouttv
 griselines
 grizandnorm
+guillaumefesquet
 gurihiru
 hammpix
 hannakdraws
@@ -245,6 +255,7 @@ heart-without-art-is-just-he
 heavycreamcomic
 hifructosemag
 hlhughes
+hongsoonsang
 hongsoonsang
 hotbloodcomic
 howtolovecomics
@@ -264,6 +275,7 @@ inkmountain
 inkwings
 inprnt
 insidematthieu
+inspijuice
 iraville
 iroga
 isthatwhatyoumint
@@ -287,6 +299,7 @@ jimcheungart
 jimjam-art
 jisook86
 jmadorran
+jmadorran
 joedrawsstuff
 joekeatinge
 joelcarroll
@@ -300,10 +313,12 @@ joverine
 joy-ang
 jp-from-vulcain
 jpkalonjiart
+jpkalonjiart
 jsrossbach
 jtowndraws
 juemialma
 juliendruant
+julienrossire
 just-art
 justinchan
 justincoffee
@@ -314,6 +329,7 @@ kangminjungart
 karenhallion
 karladiazc
 karlkerschl
+karolinepietrowski
 kassandraheller
 katikut
 keaneart
@@ -321,6 +337,7 @@ kendrasketch
 kenimation
 kevinnelsonart
 kevinwada
+keyangcocoworld
 kheleksul
 kidskribble
 kinopia
@@ -360,8 +377,10 @@ lisaveeee
 littlepaperforest
 lizclimo
 loish
+lorhs
 losdemoniosdetony
 louiedelcarmen
+lubomirarsov
 luckybeezz
 lunchbagart
 madeinhexels
@@ -369,11 +388,11 @@ maggins
 mahmudasrar
 maisonimmonen
 mallius
-markandrewsmith
 mankyseemankydo
 margueritesauvage
 mariethorhauger
 mariposa-nocturna
+markandrewsmith
 marlene-beaube
 marramew
 marvel1980s
@@ -381,6 +400,7 @@ marvelentertainment
 matiasberg
 matthieuforichon
 maxdunbar
+mayakern
 mayonose
 mbarq
 mcfarlandart
@@ -396,6 +416,7 @@ mikuloctopus
 miles-johnston
 milkmanner
 milonogiannis
+milsae
 miltklingensmith
 mimiadraws
 miraongchua
@@ -408,6 +429,7 @@ mokeydraws
 momochanners
 monchocolachaux
 monsterstreetart
+monstertreeart
 moonbotstudios
 mopka
 moremonger
@@ -423,6 +445,7 @@ nadya-mira
 nanlawson
 nargyle
 nataliehall
+nbekkaliev
 ncrossanimation
 nebezial-asheri
 necropoliscomic
@@ -448,6 +471,9 @@ originalsinfest
 orpheelin
 otgw
 ottoghetto
+ovinedelcu
+ovopack
+ovopack
 oxboxer
 ozguryildirim
 pacalin
@@ -468,8 +494,10 @@ philnoto
 phobso
 pigswithcrayons
 pinuparena
+pinupgirlsart
 pixlotl
 pixmilk
+piyotycho
 pointystix
 poorcraftcomic
 popobana
@@ -478,9 +506,11 @@ probertson
 processresource
 pryce14
 qinni
+quinnecl
 rafchu
 ramonvillalobos
 raultrevino
+rayneralencar
 redbubble
 reiquintero
 reneechio
@@ -489,10 +519,12 @@ rileyrossmo
 robertkondo
 robertvalley
 rodreisartist
+rossdraws
 rouaroua
 royalboiler
 rubyspoon
 rufftoon
+runwiththegoldenwolf
 russelldauterman
 ryanlangdraws
 ryannotbrian
@@ -536,6 +568,7 @@ sosuperawesome
 soufflevent
 souracid
 soyopanda
+sparkfunelectronics
 specialk73
 sporkii
 sqetches
@@ -566,6 +599,7 @@ thepaulrichards
 theseaofideas
 thewoodencrown
 thibaultleclercq
+thingiverse
 thingsiphotoshopped
 thomascampi
 thomaspitilli
@@ -577,7 +611,7 @@ tobycypress
 tofuvi
 tomfowlerddd
 tomfowlerstuff
-tomhaugomat
+tomhajoeyart
 tomsawyr
 toniinfante
 tonybrescini
@@ -593,6 +627,7 @@ ttyto-alba
 tunabora
 tuyoart
 tycarterart
+ugomat
 untorch
 urbanbarbarian
 vaitranquillo
@@ -621,6 +656,8 @@ yesthisisaaron
 yingjue
 yrganeramon
 yuhkidemers
+yvanduque
+zakosuheb
 zatransis
 zcape500
 zdarsky
@@ -628,5 +665,3 @@ zenpencils
 zirese
 zobobafoozie
 zorinvasili
-
-
