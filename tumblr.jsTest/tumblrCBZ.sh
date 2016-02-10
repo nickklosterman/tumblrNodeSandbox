@@ -8,17 +8,17 @@ do
     then 
 	#first check if the cbz exists, if it does update it, otherwise create new
 	echo "Updating ${LINE}.cbz"
-	zip -u ${LINE}-${date}.cbz ${LINE}*.jpg ${LINE}*.png
+	zip -u ${LINE}-${date}.cbz "${LINE}*.jpg" "${LINE}*.png"
     else
 	echo "Creating ${LINE}.cbz"
 	#    zip ${LINE}-${date}.cbz ${LINE}*.jpg ${LINE}*.png
-	zip ${LINE}-${date}.cbz ${LINE}*.jpg ${LINE}*.png
+	zip ${LINE}-${date}.cbz "${LINE}*.jpg" "${LINE}*.png"
     fi
     #remove unzipped source files
     if [[ $? != 0 ]]
     then 
 	#mv ${LINE}.zip ${LINE}.cbz
-	rm ${LINE}*.jpg ${LINE}*.png
+	rm "${LINE}*.jpg" "${LINE}*.png"
     fi
     
 done < $filename
