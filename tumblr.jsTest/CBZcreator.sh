@@ -18,6 +18,7 @@ do
     if [[ $? == 0 ]]
     then 
 	#mv ${LINE}.zip ${LINE}.cbz
+
 	rm "${LINE}"*.jpg "${LINE}"*.png
     fi
     
