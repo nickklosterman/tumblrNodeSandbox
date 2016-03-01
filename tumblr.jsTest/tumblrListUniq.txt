@@ -1,5 +1,7 @@
 2dbean
 8bitmonkey
+BrianneDrouhard
+GiuseppeCristiano
 a1courier
 abbydraws
 adafruit
@@ -11,6 +13,8 @@ adventuretime
 advicecomics
 afuchan
 aimeezhou
+airfortress
+akm87
 alchemichael
 alejo-diaz
 alexandrediboine
@@ -27,9 +31,10 @@ amymebberson
 amyreeder
 anais-maamar
 andatsea
+andrewmaclean
 andrewmar
-animationplayground
 ani-r
+animationplayground
 anna-cattish
 annaxiin
 anthonyholden
@@ -68,6 +73,7 @@ bearmantooth
 beautiful-wildlife
 beckycloonan
 beiibis
+bencaldwellart
 bendrawslife
 benfiquet
 benprenart
@@ -80,12 +86,13 @@ billotomo
 birdyhoodie
 bitchplanet
 blackyjunkgallery
-blaldmoran
+bladmoran
 blindsprings
 blythedockham
 bobbypontillas
 boheeseong
 bookofrat
+bosmatagayoff
 bouletcorp
 brandnewnostalgia
 breebird33
@@ -97,7 +104,7 @@ brokenlynx21
 brotherhoodoftofuv2
 bryankonietzko
 bub-x
-BrianneDrouhard
+ca-tsuka
 camarasketch
 cameron-stewart
 captain-laowa
@@ -106,7 +113,6 @@ carrececile
 cartoonhangover
 cartoonpolitics
 cartoonretro
-ca-tsuka
 cclog
 celine-kim
 celorart
@@ -223,9 +229,9 @@ freelance-sharkbaby
 fresherluke
 fryingtoilet
 fsacre 
+fuck-yeah-stencil-art
 fuckyeahconceptcarz
 fuckyeahfrankcho
-fuck-yeah-stencil-art
 ful-fisk
 funimationentertainment
 gabbyzapata
@@ -235,6 +241,7 @@ gameraboy
 geersart
 gelipetorres
 geminiloveskorea
+getsomeart
 gh-graphics
 gigidigi
 gingerhaze
@@ -243,15 +250,14 @@ glenbrogan
 gmshow
 gmyi
 gnarlycovers
+go-workout-now
 gobi-baptiste-gaubert
 gorrem
-go-workout-now
 goworkouttv
 griselines
 grizandnorm
 guillaumefesquet
 gurihiru
-GiuseppeCristiano
 hammpix
 hannakdraws
 heart-without-art-is-just-he
@@ -262,6 +268,7 @@ hongsoonsang
 hongsoonsang
 hotbloodcomic
 howtolovecomics
+humanhacks
 iambrao
 ianbrooks
 iasketchblog
@@ -279,6 +286,7 @@ inkwings
 inprnt
 insidematthieu
 inspijuice
+intindra
 iraville
 iroga
 isthatwhatyoumint
@@ -301,6 +309,8 @@ jfsouzatoons
 jigokuen
 jimcheungart
 jimjam-art
+jimrugg
+jisook86
 jisook86
 jmadorran
 jmadorran
@@ -309,6 +319,7 @@ joekeatinge
 joelcarroll
 joeymajdali
 johnnyrocwell
+jonathanlankry
 jonathonwallach
 jonn-lock
 jordiecolorsthings
@@ -321,6 +332,7 @@ jpkalonjiart
 jsrossbach
 jtowndraws
 juemialma
+juliaon
 juliendruant
 julienrossire
 just-art
@@ -356,22 +368,22 @@ kurtchangart
 kurtiswiebe
 kwonshell
 kylebaer
+la-vaniteuse
 labofakto
 ladugard
 ladytruds
 larrymacdougallart
 lasercutoria
 laserena
-la-vaniteuse
 lebelgebd
+lee-tao
 leegarbettart
 leeshit
-lee-tao
 legrawr
 leinilyu
 lenasayaphoum
-leo37
 leo-weiss
+leo37
 lepetitfeufollet
 leseanthomas
 letangles
@@ -401,7 +413,9 @@ mariposa-nocturna
 markandrewsmith
 marlene-beaube
 marramew
+marvel-comic
 marvel1980s
+marvelentertainment
 marvelentertainment
 matiasberg
 matthieuforichon
@@ -441,6 +455,7 @@ monstertreeart
 moonbotstudios
 mopka
 moremonger
+morenohugo
 morganjeske
 motionmarkus
 mrbreitweiser
@@ -479,6 +494,7 @@ originalsinfest
 orpheelin
 otgw
 ottoghetto
+outofsteparts
 ovinedelcu
 ovopack
 ovopack
@@ -589,6 +605,8 @@ stinedraws
 strangewood
 supersonicart
 susandrawsthings
+sweeney-boo
+t-wei
 takitakos
 taylorkrahenbuhl
 tb-sj
@@ -632,9 +650,9 @@ trainerklc
 trevinoart
 tristanbrard
 ttyto-alba
+tulalotay
 tunabora
 tuyoart
-t-wei
 tycarterart
 ugomat
 untorch
